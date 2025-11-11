@@ -15,19 +15,13 @@ public class Order {
     private String id;
     private String CustomerId;
     private ArrayList <ProductInCart> items = new ArrayList<>();
-    private Double total;
-
-    public Order () {
-        this.id =
-    }
-
+    private Double total = 0.0;
 
 
     public Double calculateTotal() {
         if (items.isEmpty()){
             throw new IllegalArgumentException("No se puede calcular el total de un pedido vacío");
         }
-
         for (ProductInCart item : items) {
             total += item.getTotalPrice();
         }
@@ -37,6 +31,10 @@ public class Order {
         return total;
     }
 
-
+    public Order(String id, String customerId, ArrayList<ProductInCart> items) {
+        this.id = id;
+        CustomerId = customerId;
+        this.items = items;
+    }
 
 }
