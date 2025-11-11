@@ -15,13 +15,13 @@ public interface OrderRepository {
      */
     List<Order> getAllOrders();
 
-    Order getOrderById(int id);
+    Order getOrderById(String id);
 
     Order createOrder(Order order);
 
     Order updateOrder(Order order);
 
-    boolean deleteOrder(int id);
+    void deleteOrder(String id);
 
 
 
