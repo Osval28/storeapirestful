@@ -17,7 +17,21 @@ public class OrderUseCase {
         return orderRepository.getAllOrders();
     }
 
+    public Order getOrderById(String id) {
+        return orderRepository.getOrderById(id);
+    }
 
+    public Order createOrder(Order order) {
+        return orderRepository.createOrder(order);
+    }
+
+    public Order updateOrder(Order order) {
+        return orderRepository.updateOrder(order);
+    }
+
+    public void deleteOrder(String id) {
+        orderRepository.deleteOrder(id);
+    }
 
 
 
