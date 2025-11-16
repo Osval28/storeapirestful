@@ -1,6 +1,4 @@
 package co.com.store.storeapirestful.usecase;
-
-
 import co.com.store.storeapirestful.model.Product;
 import co.com.store.storeapirestful.service.dataRepository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -13,7 +11,7 @@ import java.util.List;
 
 public class ProductUseCase {
 
-    private final ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     public List<Product> getProducts() {
         return productRepository.getAllProducts();
@@ -27,7 +25,7 @@ public class ProductUseCase {
         return productRepository.getProductsBetween(min, max);
     }
 
-    public Product createProduct (Product product) {
+    public Product createProduct(Product product) {
         return productRepository.createProduct(product);
     }
 

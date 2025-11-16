@@ -1,6 +1,8 @@
 package co.com.store.storeapirestful.service.dataRepository;
 
 import co.com.store.storeapirestful.model.Order;
+import co.com.store.storeapirestful.model.ProductInCart;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,7 +39,6 @@ public class InMemoryOrderService implements OrderRepository{
     @Override
     public Order updateOrder(Order order) {
         Order existingOrder = getOrderById(order.getId());
-        existingOrder.setId(order.getId());
         existingOrder.setItems(order.getItems());
         existingOrder.setCustomerId(order.getCustomerId());
         existingOrder.setTotal(order.getTotal());
@@ -49,4 +50,19 @@ public class InMemoryOrderService implements OrderRepository{
         Order orderToDelete = getOrderById(id);
         this.orders.remove(orderToDelete);
     }
+
+    public Double calculateTotal(Order order) {
+        Double total = 0.0;
+        if (order.getItems().isEmpty()){
+            throw new IllegalArgumentException("No se puede calcular el total de un pedido vacío");
+        }
+        for (ProductInCart item : order.getItems()) {
+            total += item.getTotalPrice();
+        }
+        if (total > 100000) {
+            total = total*0.95;
+        }
+        return total;
+    }
+
 }
