@@ -16,18 +16,18 @@ import java.util.List;
 
 public class ProductDTO {
 
-    @NotNull(message = "Se requiere el id del producto")
+    @NotNull(message = "the id is required")
     private String id;
 
-    @NotNull(message = "Se requiere el nombre del producto")
+    @NotNull(message = "the name is required")
     private String name;
 
-    @NotNull(message = "Se requiere la categoria del producto")
+    @NotNull(message = "the category is required")
     private String category;
 
 
-    @NotNull(message = "Se requiere el precio del producto")
-    @Min(value = 0, message = "El precio del producto no puede ser negativo")
+    @NotNull(message = "the price is required")
+    @Min(value = 0, message = "the price must be positive")
     private double price;
 
     public static ProductDTO fromModel(Product product) {

@@ -1,5 +1,4 @@
 package co.com.store.storeapirestful.controller;
-
 import co.com.store.storeapirestful.model.Order;
 import co.com.store.storeapirestful.usecase.OrderUseCase;
 import lombok.AllArgsConstructor;
@@ -36,12 +35,10 @@ public class OrderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrder(String id) {
+    public ResponseEntity<?> deleteOrder(@PathVariable String id) {
         orderUseCase.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
-
-
 
 
 }

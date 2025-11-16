@@ -25,6 +25,10 @@ public class ProductUseCase {
         return productRepository.getProductsBetween(min, max);
     }
 
+    public List<Product> getProductsByCategory (String category) {
+        return productRepository.getProductsByCategory(category);
+    }
+
     public Product createProduct(Product product) {
         return productRepository.createProduct(product);
     }

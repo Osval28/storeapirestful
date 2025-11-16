@@ -3,12 +3,11 @@ package co.com.store.storeapirestful.controller;
 import co.com.store.storeapirestful.controller.dto.ProductDTO;
 import co.com.store.storeapirestful.model.Product;
 import co.com.store.storeapirestful.usecase.ProductUseCase;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,35 +25,38 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    public ResponseEntity<?> getProductById(String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable String id) {
         ProductDTO product = ProductDTO.fromModel(productUseCase.getProductById(id));
         return ResponseEntity.ok(product);
     }
 
-    public ResponseEntity<?> getProductsBetween(Double min, Double max) {
-        return ResponseEntity.ok(productUseCase.getProductsBetween(min,max));
+    @GetMapping
+    public ResponseEntity<?> getProductsByCategory(@RequestParam String category) {
+        List<ProductDTO> products = ProductDTO.fromModelList(productUseCase.getProductsByCategory(category));
+        return ResponseEntity.ok(products);
     }
 
-    public ResponseEntity<?> createProduct(ProductDTO productDTO) {
+    @GetMapping("range")
+    public ResponseEntity<?> getProductsBetween(@RequestParam Double min, @RequestParam Double max) {
+        return ResponseEntity.ok(productUseCase.getProductsBetween(min, max));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productUseCase.createProduct(ProductDTO.toModel(productDTO)));
     }
 
-    public ResponseEntity<?> updateProduct(Product product) {
-        return ResponseEntity.ok(productUseCase.updateProduct(product));
+    @PutMapping
+    public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productUseCase.updateProduct(ProductDTO.toModel(productDTO)));
     }
 
-    public ResponseEntity<?> deleteProduct(String id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable String id) {
         productUseCase.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
-
-
-
-
 }
+
+

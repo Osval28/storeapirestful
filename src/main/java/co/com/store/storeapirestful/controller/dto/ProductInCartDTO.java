@@ -2,6 +2,8 @@ package co.com.store.storeapirestful.controller.dto;
 
 import co.com.store.storeapirestful.model.Product;
 import co.com.store.storeapirestful.model.ProductInCart;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,10 +14,14 @@ import lombok.Setter;
 
 public class ProductInCartDTO {
 
+    @NotNull(message = "the product is required")
     Product product;
+
+    @NotNull(message = "the quantity is required")
+    @Min(value = 0, message = "the quantity must >= 0")
     int quantity;
 
-    public Double getTotalPrice() {
+    public Double getPrice() {
         return product.getPrice()*quantity;
     }
 

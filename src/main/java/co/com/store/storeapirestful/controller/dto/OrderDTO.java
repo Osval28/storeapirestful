@@ -2,6 +2,7 @@ package co.com.store.storeapirestful.controller.dto;
 
 import co.com.store.storeapirestful.model.Order;
 import co.com.store.storeapirestful.model.ProductInCart;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 
 public class OrderDTO {
+
     private String id;
     private String customerId;
+
+    @NotNull(message = "the items are required")
     private ArrayList <ProductInCartDTO> items = new ArrayList<>();
     private Double total;
 

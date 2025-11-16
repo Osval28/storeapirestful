@@ -2,13 +2,14 @@ package co.com.store.storeapirestful.service.dataRepository;
 import co.com.store.storeapirestful.model.Product;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 
 public class InMemoryProductService implements ProductRepository{
 
-    private List <Product> products;
+    private List <Product> products = new ArrayList<>();
 
 
     @Override
@@ -25,6 +26,11 @@ public class InMemoryProductService implements ProductRepository{
     @Override
     public List<Product> getProductsBetween(Double min, Double max) {
         return this.products.stream().filter(product -> product.getPrice() >= min && product.getPrice() <= max).toList();
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(String category) {
+        return this.products.stream().filter(product -> product.getCategory().equalsIgnoreCase(category)).toList();
     }
 
     @Override
