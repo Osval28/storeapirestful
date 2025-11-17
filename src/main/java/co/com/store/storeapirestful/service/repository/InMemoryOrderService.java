@@ -22,13 +22,13 @@ public class InMemoryOrderService implements OrderRepository{
     @Override
     public Order getOrderById(String id) {
         return orders.stream().filter(order -> order.getId().equals(id)).findFirst().orElseThrow(() ->
-                new IllegalArgumentException("Usuario con id: " + id + " no encontrado"));
+                new IllegalArgumentException("Pedido con id: " + id + " no encontrado"));
     }
 
     @Override
     public Order createOrder(Order order) {
         if (orders.stream().anyMatch(existingOrder -> existingOrder.getId().equals(order.getId()))) {
-            throw new IllegalArgumentException("Order con id: " + order.getId() + " ya existe");
+            throw new IllegalArgumentException("Pedido con id: " + order.getId() + " ya existe");
         } else {
             orders.add(order);
             return order;

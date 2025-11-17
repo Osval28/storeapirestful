@@ -16,7 +16,7 @@ public class Order {
     private String id;
     private String customerId;
     private ArrayList <ProductInCart> items = new ArrayList<>();
-    private Double total = 0.0;
+    private Double total;
 
 
     public Order(String id, String customerId, ArrayList<ProductInCart> items) {

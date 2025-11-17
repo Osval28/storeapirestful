@@ -18,7 +18,7 @@ public class ProductInCartDTO {
     Product product;
 
     @NotNull(message = "the quantity is required")
-    @Min(value = 0, message = "the quantity must >= 0")
+    @Min(value = 0, message = "the quantity must > 0")
     int quantity;
 
     public Double getPrice() {

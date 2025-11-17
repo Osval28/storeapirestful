@@ -2,16 +2,21 @@ package co.com.store.storeapirestful.usecase;
 import co.com.store.storeapirestful.model.Product;
 import co.com.store.storeapirestful.service.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
 
 public class ProductUseCase {
 
-    private ProductRepository productRepository;
+    private ProductRepository productRepository ;
+
+    public ProductUseCase(@Qualifier("inMemoryProductService") ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getProducts() {
         return productRepository.getAllProducts();
