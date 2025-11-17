@@ -1,6 +1,4 @@
 package co.com.store.storeapirestful.controller.exception;
-
-
 import co.com.store.storeapirestful.controller.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -2,35 +2,36 @@ package co.com.store.storeapirestful.service.entity;
 
 import co.com.store.storeapirestful.model.ProductInCart;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@Entity
+@Table(name = "productsInCart")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductInCartEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private int quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "productsInOrders",
-            joinColumns = @JoinColumn(name = "productID"),
-            inverseJoinColumns = @JoinColumn(name = "orderID")
-    )
+    @JoinColumn(name = "productId")
     private ProductEntity product;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderId")
+    private OrderEntity order;
 
-    public static ProductInCartEntity fromModel(ProductInCart productInCart){
-        return new ProductInCartEntity(productInCart.getQuantity(), ProductEntity.fromModel(productInCart.getProduct()));
+    public static ProductInCartEntity fromModel(ProductInCart model) {
+        ProductInCartEntity entity = new ProductInCartEntity();entity.setQuantity(model.getQuantity());entity.setProduct(ProductEntity.fromModel(model.getProduct()));
+        return entity;
     }
 
-    public static ProductInCart toModel(ProductInCartEntity productInCartEntity){
-        return new ProductInCart(ProductEntity.toModel(productInCartEntity.getProduct()),productInCartEntity.getQuantity());
+    public static ProductInCart toModel(ProductInCartEntity entity) {
+        return new ProductInCart(ProductEntity.toModel(entity.getProduct()), entity.getQuantity());
     }
-
-
 }

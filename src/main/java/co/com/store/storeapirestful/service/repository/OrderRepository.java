@@ -1,18 +1,15 @@
-package co.com.store.storeapirestful.service.dataRepository;
+package co.com.store.storeapirestful.service.repository;
 
 import co.com.store.storeapirestful.model.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 
 public interface OrderRepository {
 
-    /**
-     *
-     * @return
-     */
+
     List<Order> getAllOrders();
 
     Order getOrderById(String id);

@@ -2,12 +2,10 @@ package co.com.store.storeapirestful.service.entity;
 
 import co.com.store.storeapirestful.model.Order;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -15,28 +13,33 @@ import java.util.ArrayList;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class OrderEntity {
 
     @Id
     private String id;
+
     private String customerId;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "productsInOrders",
-            joinColumns = @JoinColumn(name = "orderID"),
-            inverseJoinColumns = @JoinColumn(name = "productID")
-    )
-    private ArrayList<ProductInCartEntity> items = new ArrayList<>();
-    private Double total = 0.0;
+
+    private Double total;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductInCartEntity> items = new ArrayList<>();
 
     public static OrderEntity fromModel(Order order) {
-        ArrayList<ProductInCartEntity> itemsEntity = new ArrayList<>();
+
+        OrderEntity Orderentity = new OrderEntity();
+        Orderentity.setId(order.getId());
+        Orderentity.setCustomerId(order.getCustomerId());
+        Orderentity.setTotal(order.getTotal());
+
+        List<ProductInCartEntity> itemEntities = new ArrayList<>();
         for (var item : order.getItems()) {
-            itemsEntity.add(ProductInCartEntity.fromModel(item));
+            var itemEntity = ProductInCartEntity.fromModel(item);
+            itemEntity.setOrder(Orderentity);
+            itemEntities.add(itemEntity);
         }
-        return new OrderEntity(order.getId(),order.getCustomerId(),itemsEntity,order.getTotal());
+
+        Orderentity.setItems(itemEntities);
+        return Orderentity;
     }
-
-
 }

@@ -31,13 +31,13 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @GetMapping
+    @GetMapping("/category")
     public ResponseEntity<?> getProductsByCategory(@RequestParam String category) {
         List<ProductDTO> products = ProductDTO.fromModelList(productUseCase.getProductsByCategory(category));
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("range")
+    @GetMapping("/range")
     public ResponseEntity<?> getProductsBetween(@RequestParam Double min, @RequestParam Double max) {
         return ResponseEntity.ok(productUseCase.getProductsBetween(min, max));
     }

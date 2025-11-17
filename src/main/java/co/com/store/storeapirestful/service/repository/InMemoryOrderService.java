@@ -1,4 +1,4 @@
-package co.com.store.storeapirestful.service.dataRepository;
+package co.com.store.storeapirestful.service.repository;
 
 import co.com.store.storeapirestful.model.Order;
 import co.com.store.storeapirestful.model.ProductInCart;

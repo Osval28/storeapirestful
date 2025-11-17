@@ -1,13 +1,13 @@
-package co.com.store.storeapirestful.service.dataRepository;
+package co.com.store.storeapirestful.service.repository;
 
 import co.com.store.storeapirestful.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 
-public interface ProductRepository {
+
+public interface ProductRepository{
 
     List<Product> getAllProducts();
     Product getProductById(String id);

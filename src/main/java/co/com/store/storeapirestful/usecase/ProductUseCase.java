@@ -1,6 +1,6 @@
 package co.com.store.storeapirestful.usecase;
 import co.com.store.storeapirestful.model.Product;
-import co.com.store.storeapirestful.service.dataRepository.ProductRepository;
+import co.com.store.storeapirestful.service.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
