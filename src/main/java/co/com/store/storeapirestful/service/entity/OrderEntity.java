@@ -1,6 +1,7 @@
 package co.com.store.storeapirestful.service.entity;
 
 import co.com.store.storeapirestful.model.Order;
+import co.com.store.storeapirestful.model.ProductInCart;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,4 +43,27 @@ public class OrderEntity {
         Orderentity.setItems(itemEntities);
         return Orderentity;
     }
+
+    public static Order toModel(OrderEntity orderEntity) {
+        Order order = new Order();
+        order.setId(orderEntity.getId());
+        order.setCustomerId(orderEntity.getCustomerId());
+        order.setTotal(orderEntity.getTotal());
+
+        ArrayList<ProductInCart> items = new ArrayList<>();
+        for (var itemEntity : orderEntity.getItems()) {
+            items.add(ProductInCartEntity.toModel(itemEntity));
+        }
+        order.setItems(items);
+        return order;
+    }
+
+    public static List<Order> toModelList(List<OrderEntity> orderEntities) {
+        List<Order> orders = new ArrayList<>();
+        for (var orderEntity : orderEntities) {
+            orders.add(toModel(orderEntity));
+        }
+        return orders;
+    }
+
 }

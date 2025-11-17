@@ -34,4 +34,8 @@ public class ProductInCartEntity {
     public static ProductInCart toModel(ProductInCartEntity entity) {
         return new ProductInCart(ProductEntity.toModel(entity.getProduct()), entity.getQuantity());
     }
+
+
+
+
 }
