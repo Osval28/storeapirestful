@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productUseCase.createProduct(ProductDTO.toModel(productDTO)));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductDTO productDTO) {
         return ResponseEntity.ok(productUseCase.updateProduct(ProductDTO.toModel(productDTO)));
     }

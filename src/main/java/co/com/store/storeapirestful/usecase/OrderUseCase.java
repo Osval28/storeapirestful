@@ -3,15 +3,19 @@ package co.com.store.storeapirestful.usecase;
 import co.com.store.storeapirestful.model.Order;
 import co.com.store.storeapirestful.service.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
 public class OrderUseCase {
 
     private final OrderRepository orderRepository;
+
+    public OrderUseCase(@Qualifier("mySQLOrderService") OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     public List<Order> getOrders() {
         return orderRepository.getAllOrders();

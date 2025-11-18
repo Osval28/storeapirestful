@@ -14,7 +14,7 @@ public class ProductUseCase {
 
     private ProductRepository productRepository ;
 
-    public ProductUseCase(@Qualifier("inMemoryProductService") ProductRepository productRepository) {
+    public ProductUseCase(@Qualifier("mySQLProductService") ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
