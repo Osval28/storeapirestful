@@ -17,6 +17,7 @@ public class Order {
     private String customerId;
     private ArrayList <ProductInCart> items = new ArrayList<>();
     private Double total;
+    private OrderStatus status = OrderStatus.OPEN;
 
 
     public Order(String id, String customerId, ArrayList<ProductInCart> items) {

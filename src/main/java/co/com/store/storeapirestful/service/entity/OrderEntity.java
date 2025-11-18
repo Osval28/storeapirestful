@@ -1,6 +1,7 @@
 package co.com.store.storeapirestful.service.entity;
 
 import co.com.store.storeapirestful.model.Order;
+import co.com.store.storeapirestful.model.OrderStatus;
 import co.com.store.storeapirestful.model.ProductInCart;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,6 +26,9 @@ public class OrderEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductInCartEntity> items = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.OPEN;
 
     public static OrderEntity fromModel(Order order) {
 
