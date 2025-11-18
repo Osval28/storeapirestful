@@ -53,6 +53,7 @@ public class MySQLOrderService implements OrderRepository{
             itemEntity.setOrder(existingOrderEntity);
             newItems.add(itemEntity);
         }
+        existingOrderEntity.setItems(newItems);
         orderRepository.save(existingOrderEntity);
         return OrderEntity.toModel(existingOrderEntity);
 

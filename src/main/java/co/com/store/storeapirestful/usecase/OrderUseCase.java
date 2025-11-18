@@ -83,7 +83,7 @@ public class OrderUseCase {
         return order;
     }
 
-    public Order UpdateItem(String orderId, String productId, Integer quantity) {
+    public Order updateItem(String orderId, String productId, Integer quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("The quantity must be greater than or equal to zero");
         }
