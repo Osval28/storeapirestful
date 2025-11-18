@@ -62,17 +62,5 @@ public class MySQLOrderService implements OrderRepository{
     public void deleteOrder(String id) {
         orderRepository.deleteById(id);
     }
-    public Double calculateTotal(Order order) {
-        Double total = 0.0;
-        if (order.getItems().isEmpty()){
-            throw new IllegalArgumentException("No se puede calcular el total de un pedido vacío");
-        }
-        for (ProductInCart item : order.getItems()) {
-            total += item.getTotalPrice();
-        }
-        if (total > 100000) {
-            total = total*0.95;
-        }
-        return total;
-    }
+
 }

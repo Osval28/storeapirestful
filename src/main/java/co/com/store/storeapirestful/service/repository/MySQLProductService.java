@@ -45,16 +45,22 @@ public class MySQLProductService implements ProductRepository{
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        ProductEntity existingProductEntity = productRepository.findById(product.getId()).orElseThrow(() ->
+                new IllegalArgumentException("Producto con id: " + product.getId() + " no encontrado"));
+        existingProductEntity.setName(product.getName());
+        existingProductEntity.setCategory(product.getCategory());
+        existingProductEntity.setPrice(product.getPrice());
+        productRepository.save(existingProductEntity);
+        return ProductEntity.toModel(existingProductEntity);
     }
 
     @Override
     public void deleteProduct(String id) {
-
+        productRepository.deleteById(id);
     }
 
     @Override
     public List<Product> getProductsByCategory(String category) {
-        return List.of();
+        return ProductEntity.toModelList(productRepository.findByCategory(category));
     }
 }

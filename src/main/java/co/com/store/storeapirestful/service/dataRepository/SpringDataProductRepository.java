@@ -10,5 +10,6 @@ import java.util.List;
 public interface SpringDataProductRepository extends JpaRepository<ProductEntity, String> {
 
     List<ProductEntity> findByPriceBetween(double min, double max);
+    List<ProductEntity> findByCategory(String category);
 
 }
