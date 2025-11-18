@@ -4,6 +4,8 @@ import co.com.store.storeapirestful.model.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 @Table(name = "products")
 @Getter
@@ -26,5 +28,14 @@ public class ProductEntity {
     public static Product toModel(ProductEntity entity) {
         return new Product(entity.getId(), entity.getName(), entity.getCategory(), entity.getPrice());
     }
+
+    public static List<Product> toModelList(List<ProductEntity> entities) {
+        List<Product> products = new ArrayList<>();
+        for (ProductEntity productEntity : entities) {
+            products.add(toModel(productEntity));
+        }
+        return products;
+    }
+
 
 }
