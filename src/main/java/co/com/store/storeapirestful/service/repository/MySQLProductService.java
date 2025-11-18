@@ -2,6 +2,7 @@ package co.com.store.storeapirestful.service.repository;
 
 import co.com.store.storeapirestful.model.Product;
 import co.com.store.storeapirestful.service.dataRepository.SpringDataProductRepository;
+import co.com.store.storeapirestful.service.entity.OrderEntity;
 import co.com.store.storeapirestful.service.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,17 +23,24 @@ public class MySQLProductService implements ProductRepository{
 
     @Override
     public Product getProductById(String id) {
-        return null;
+        return ProductEntity.toModel(productRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Producto con id: " + id + " no encontrado")));
     }
 
     @Override
     public List<Product> getProductsBetween(Double min, Double max) {
-        return List.of();
+        return ProductEntity.toModelList(productRepository.findByPriceBetween(min, max));
     }
 
     @Override
     public Product createProduct(Product product) {
-        return null;
+        if (productRepository.existsById(product.getId())) {
+            throw new IllegalArgumentException("Producto con id: " + product.getId() + " ya existe");
+        } else {
+            ProductEntity productEntity = ProductEntity.fromModel(product);
+            productRepository.save(productEntity);
+            return ProductEntity.toModel(productEntity);
+        }
     }
 
     @Override
